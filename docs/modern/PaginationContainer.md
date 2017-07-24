@@ -60,7 +60,7 @@ In addition to the fields you plan to query, you'll also need to fetch `pageInfo
 ```javascript
 graphql`
   fragment Feed_user on User {
-    feed(first: $count, after: $cursor) @connection(key: "Feed_feed") {
+    feed(first: $count, after: $cursor) @connection(key: "Feed_feed", filters: ["first", "after", "orderby"]) {
       edges {
         node {
           id,
@@ -122,7 +122,7 @@ module.exports = createPaginationContainer(
           first: $count
           after: $cursor
           orderby: $orderBy # other variables
-        ) @connection(key: "Feed_feed") {
+        ) @connection(key: "Feed_feed", filters: ["first", "after", "orderby"]) {
           edges {
             node {
               id
